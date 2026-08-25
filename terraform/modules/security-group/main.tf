@@ -30,9 +30,9 @@ resource "aws_security_group_rule" "ingress" {
   to_port     = var.ingress_rules[count.index].to_port
   protocol    = var.ingress_rules[count.index].protocol
   cidr_blocks = lookup(var.ingress_rules[count.index], "cidr_blocks", null)
-  
+
   source_security_group_id = lookup(var.ingress_rules[count.index], "source_security_group_id", null)
-  
+
   description = lookup(var.ingress_rules[count.index], "description", "Managed by Terraform")
 }
 
@@ -49,8 +49,8 @@ resource "aws_security_group_rule" "egress" {
   to_port     = var.egress_rules[count.index].to_port
   protocol    = var.egress_rules[count.index].protocol
   cidr_blocks = lookup(var.egress_rules[count.index], "cidr_blocks", null)
-  
+
   source_security_group_id = lookup(var.egress_rules[count.index], "source_security_group_id", null)
-  
+
   description = lookup(var.egress_rules[count.index], "description", "Managed by Terraform")
 }

@@ -100,7 +100,7 @@ resource "aws_eip" "nat" {
   count = var.enable_nat_gateway ? var.nat_gateway_count : 0
 
   domain = "vpc"
-  
+
   tags = merge(var.tags, {
     Name = "${var.name}-nat-eip-${count.index + 1}"
   })

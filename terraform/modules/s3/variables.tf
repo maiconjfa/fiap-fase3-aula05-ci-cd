@@ -29,7 +29,7 @@ variable "encryption_algorithm" {
   description = "Algoritmo de criptografia"
   type        = string
   default     = "AES256"
-  
+
   validation {
     condition     = contains(["AES256", "aws:kms"], var.encryption_algorithm)
     error_message = "Encryption algorithm must be AES256 or aws:kms."

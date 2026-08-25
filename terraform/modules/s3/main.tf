@@ -8,7 +8,7 @@
 # ============================================
 resource "random_string" "suffix" {
   count = var.use_random_suffix ? 1 : 0
-  
+
   length  = 8
   special = false
   upper   = false
@@ -30,9 +30,9 @@ resource "aws_s3_bucket" "main" {
 # ============================================
 resource "aws_s3_bucket_versioning" "main" {
   count = var.enable_versioning ? 1 : 0
-  
+
   bucket = aws_s3_bucket.main.id
-  
+
   versioning_configuration {
     status = "Enabled"
   }
@@ -43,7 +43,7 @@ resource "aws_s3_bucket_versioning" "main" {
 # ============================================
 resource "aws_s3_bucket_server_side_encryption_configuration" "main" {
   count = var.enable_encryption ? 1 : 0
-  
+
   bucket = aws_s3_bucket.main.id
 
   rule {
@@ -58,7 +58,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "main" {
 # ============================================
 resource "aws_s3_bucket_public_access_block" "main" {
   count = var.block_public_access ? 1 : 0
-  
+
   bucket = aws_s3_bucket.main.id
 
   block_public_acls       = true
@@ -72,7 +72,7 @@ resource "aws_s3_bucket_public_access_block" "main" {
 # ============================================
 resource "aws_s3_bucket_lifecycle_configuration" "main" {
   count = length(var.lifecycle_rules) > 0 ? 1 : 0
-  
+
   bucket = aws_s3_bucket.main.id
 
   dynamic "rule" {
@@ -103,7 +103,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "main" {
 # ============================================
 resource "aws_s3_bucket_policy" "main" {
   count = var.bucket_policy != null ? 1 : 0
-  
+
   bucket = aws_s3_bucket.main.id
   policy = var.bucket_policy
 }

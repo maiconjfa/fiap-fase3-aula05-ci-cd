@@ -1,58 +1,56 @@
-# name: 🏗️ Multi-Environment
+name: 🏗️ Multi-Environment
 
-# on:
-#   push:
-#     branches: [ develop, staging ]
+on:
+  push:
+    branches: [ develop, staging ]
 
-# jobs:
-#   deploy-dev:
-#     name: 🔧 Development
-#     runs-on: ubuntu-latest
-#     if: github.ref == 'refs/heads/develop'
+jobs:
+  deploy-dev:
+    name: 🔧 Development
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
     
-#     steps:
-#       - name: 📥 Checkout
-#         uses: actions/checkout@v4
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
       
-#       - name: 🔧 Setup Terraform
-#         uses: hashicorp/setup-terraform@v3
+      - name: 🔧 Setup Terraform
+        uses: hashicorp/setup-terraform@v3
       
-#       - name: 🔑 Configure AWS
-#         uses: aws-actions/configure-aws-credentials@v4
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-#           aws-region: us-east-1
+      - name: 🔑 Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       
-#       - name: ⚙️ Init & Deploy Dev
-#         working-directory: terraform/environments/development
-#         run: |
-#           terraform init
-#           terraform apply -auto-approve
+      - name: ⚙️ Init & Deploy Dev
+        working-directory: terraform/environments/development
+        run: |
+          terraform init
+          terraform apply -auto-approve
 
-#   deploy-staging:
-#     name: 🧪 Staging  
-#     runs-on: ubuntu-latest
-#     if: github.ref == 'refs/heads/staging'
+  deploy-staging:
+    name: 🧪 Staging  
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
     
-#     steps:
-#       - name: 📥 Checkout
-#         uses: actions/checkout@v4
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
       
-#       - name: 🔧 Setup Terraform
-#         uses: hashicorp/setup-terraform@v3
+      - name: 🔧 Setup Terraform
+        uses: hashicorp/setup-terraform@v3
       
-#       - name: 🔑 Configure AWS
-#         uses: aws-actions/configure-aws-credentials@v4
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-#           aws-region: us-east-1
+      - name: 🔑 Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       
-#       - name: ⚙️ Init & Deploy Staging
-#         working-directory: terraform/environments/staging
-#         run: |
-#           terraform init
-#           terraform apply -auto-approve
+      - name: ⚙️ Init & Deploy Staging
+        working-directory: terraform/environments/staging
+        run: |
+          terraform init
+          terraform apply -auto-approve
