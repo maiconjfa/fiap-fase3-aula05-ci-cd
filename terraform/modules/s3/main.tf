@@ -107,3 +107,5 @@ resource "aws_s3_bucket_policy" "main" {
   bucket = aws_s3_bucket.main.id
   policy = var.bucket_policy
 }
+
+#
